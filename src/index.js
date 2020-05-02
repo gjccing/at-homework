@@ -1,6 +1,4 @@
-import React from 'react'
-import styles from './styles.module.css'
-
-export const ExampleComponent = ({ text }) => {
-  return <div className={styles.test}>Example Component: {text}</div>
-}
+export { default as Section } from './components/Section'
+export { default as TimeList } from './components/TimeList'
+export { default as WeekCalendar } from './components/WeekCalendar'
+export { default as locale } from './locale'
