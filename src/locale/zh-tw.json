@@ -1,6 +1,6 @@
 {
   "available_times": "授課時間",
-  "time_zone_notice": "* 時間以: {{area}} ({{zone}})",
+  "time_zone_notice": "* 時間以: {{area}}:({{zone}})",
   "area": {
     "Africa/Abidjan": "阿比讓",
     "Africa/Accra": "Accra",

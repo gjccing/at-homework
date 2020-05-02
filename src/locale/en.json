@@ -1,6 +1,6 @@
 {
   "available_times": "Available times",
-  "time_zone_notice": "* All the timings listed are in your timezone: {{area}} ({{zone}})",
+  "time_zone_notice": "* All the timings listed are in your timezone: {{area}}:({{zone}})",
   "area": {
     "Africa/Abidjan": "Abidjan",
     "Africa/Accra": "Accra",
