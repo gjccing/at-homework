@@ -4,7 +4,7 @@ import moment from 'moment'
 import 'moment/locale/zh-tw'
 import classnames from 'classnames'
 import locales from '../../locale'
-import './style.css'
+import styles from './styles.module.css'
 
 const timezoneName = Intl.DateTimeFormat().resolvedOptions().timeZone
 const timezoneFormat = ((offset) =>
@@ -46,16 +46,16 @@ const WeekCalendar = ({
     [validRange[1], currentWeek]
   )
   return (
-    <div className='week-calendar'>
-      <header className='week-calendar--header'>
-        <div className='week-calendar--control-bar'>
-          <div className='week-calendar--button-group'>
+    <div className={styles['week-calendar']}>
+      <header className={styles['week-calendar--header']}>
+        <div className={styles['week-calendar--control-bar']}>
+          <div className={styles['week-calendar--button-group']}>
             <button
               type='button'
               className={classnames(
-                'week-calendar--button',
-                'week-calendar--button-left',
-                isLastWeekAvailable || 'week-calendar--button-disabled'
+                styles['week-calendar--button'],
+                styles['week-calendar--button-left'],
+                isLastWeekAvailable || styles['week-calendar--button-disabled']
               )}
               disabled={!isLastWeekAvailable}
               onClick={() =>
@@ -67,9 +67,9 @@ const WeekCalendar = ({
             <button
               type='button'
               className={classnames(
-                'week-calendar--button',
-                'week-calendar--button-right',
-                isNextWeekAvailable || 'week-calendar--button-disabled'
+                styles['week-calendar--button'],
+                styles['week-calendar--button-right'],
+                isNextWeekAvailable || styles['week-calendar--button-disabled']
               )}
               disabled={!isNextWeekAvailable}
               onClick={() =>
@@ -79,29 +79,29 @@ const WeekCalendar = ({
               &gt;
             </button>
           </div>
-          <span className='week-calendar--current-week'>
+          <span className={styles['week-calendar--current-week']}>
             {`${currentWeek.day(0).format('YYYY/MM/DD')} - ${currentWeek
               .day(6)
               .format('DD')}`}
           </span>
         </div>
-        <span className='week-calendar--header--notice'>
+        <span className={styles['week-calendar--header--notice']}>
           {langUtil.getMessage('time_zone_notice', {
             area: langUtil.getMessage(`area.${timezoneName}`),
             zone: timezoneFormat
           })}
         </span>
       </header>
-      <table className='week-calendar--table'>
+      <table className={styles['week-calendar--table']}>
         <thead>
           <tr>
             {Array.from(Array(7).keys()).map((i) => (
               <th
                 key={`week-calendar--day-head-${i}`}
                 className={classnames(
-                  'week-calendar--day-head',
+                  styles['week-calendar--day-head'],
                   isBetweenValidRage(currentWeek.day(i)) ||
-                    'week-calendar--day-head-disabled'
+                    styles['week-calendar--day-head-disabled']
                 )}
               >
                 {currentWeek.day(i).format(DayOfWeekFormat)}
@@ -116,7 +116,7 @@ const WeekCalendar = ({
             {Array.from(Array(7).keys()).map((i) => (
               <td
                 key={`week-calendar--day-cell-${i}`}
-                className='week-calendar--day-cell'
+                className={styles['week-calendar--day-cell']}
               >
                 {isBetweenValidRage(currentWeek.day(i))
                   ? renderCell(new Date(currentWeek.day(i).millisecond()))
@@ -127,7 +127,7 @@ const WeekCalendar = ({
           </tr>
         </tbody>
       </table>
-      {loading && <div className='week-calendar--loading' />}
+      {loading && <div className={styles['week-calendar--loading']} />}
     </div>
   )
 }
