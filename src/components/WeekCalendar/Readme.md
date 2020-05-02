@@ -42,7 +42,7 @@ import moment from 'moment'
 
 const [currentWeekOfYear, setCurrentWeekOfYear] = React.useState(moment().weeks())
 ;<WeekCalendar
-  locale="zh-tw"
+  lang="zh-tw"
   currentWeekOfYear={currentWeekOfYear}
   renderCell={(date) => 'something happen'}
   onPageChange={(week) => setCurrentWeekOfYear(week)}

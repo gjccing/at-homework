@@ -1,9 +1,9 @@
-import React, { useCallback, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
 import 'moment/locale/zh-tw'
 import classnames from 'classnames'
-import locales from '../../locale'
+import locale from '../../locale'
 import styles from './styles.module.css'
 
 const timezoneName = Intl.DateTimeFormat().resolvedOptions().timeZone
@@ -16,7 +16,7 @@ const timezoneFormat = ((offset) =>
 )
 
 const WeekCalendar = ({
-  locale,
+  lang,
   loading,
   currentWeekOfYear,
   validRange,
@@ -25,10 +25,11 @@ const WeekCalendar = ({
   renderCell,
   onPageChange
 }) => {
-  useCallback(() => moment.locale(locale), [locale])
-  const langUtil = useMemo(() => locales.genUtil(locale), [locale])
+  useMemo(() => moment.locale(lang), [lang])
+  const langUtil = useMemo(() => locale.genUtil(lang), [lang])
   const currentWeek = useMemo(() => moment().week(currentWeekOfYear), [
-    currentWeekOfYear
+    currentWeekOfYear,
+    lang
   ])
   const isBetweenValidRage = (momentDate) =>
     momentDate.isBetween(
@@ -97,7 +98,7 @@ const WeekCalendar = ({
           <tr>
             {Array.from(Array(7).keys()).map((i) => (
               <th
-                key={`week-calendar--day-head-${i}`}
+                key={`${lang}--week-calendar--day-head-${i}`}
                 className={classnames(
                   styles['week-calendar--day-head'],
                   isBetweenValidRage(currentWeek.day(i)) ||
@@ -119,9 +120,8 @@ const WeekCalendar = ({
                 className={styles['week-calendar--day-cell']}
               >
                 {isBetweenValidRage(currentWeek.day(i))
-                  ? renderCell(new Date(currentWeek.day(i).millisecond()))
-                  : null
-                }
+                  ? renderCell(currentWeek.day(i).toDate())
+                  : null}
               </td>
             ))}
           </tr>
@@ -134,9 +134,9 @@ const WeekCalendar = ({
 
 WeekCalendar.propTypes = {
   loading: PropTypes.bool,
-  locale: PropTypes.oneOf(['en', 'zh-tw']),
+  lang: PropTypes.oneOf(['en', 'zh-tw']),
   currentWeekOfYear: PropTypes.number,
-  validRange: PropTypes.arrayOf([PropTypes.number, PropTypes.number]),
+  validRange: PropTypes.arrayOf(PropTypes.instanceOf(Date)),
   DayOfWeekFormat: PropTypes.string,
   DayOfMonthFormat: PropTypes.string,
   renderCell: PropTypes.func,
@@ -145,9 +145,9 @@ WeekCalendar.propTypes = {
 
 WeekCalendar.defaultProps = {
   loading: false,
-  locale: 'en',
+  lang: 'en',
   currentWeekOfYear: moment().weeks(),
-  validRange: [Math.floor(Date.now() / 86400000) * 86400000, undefined],
+  validRange: [moment().startOf('day').toDate(), undefined],
   DayOfWeekFormat: 'ddd',
   DayOfMonthFormat: 'DD',
   renderCell: (date) => {},
