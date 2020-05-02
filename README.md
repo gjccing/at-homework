@@ -4,26 +4,13 @@
 
 [![NPM](https://img.shields.io/npm/v/at-homework.svg)](https://www.npmjs.com/package/at-homework) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-## Install
+## Run
 
 ```bash
-npm install --save at-homework
+npm run start:quick
 ```
 
-## Usage
-
-```jsx
-import React, { Component } from 'react'
-
-import MyComponent from 'at-homework'
-import 'at-homework/dist/index.css'
-
-class Example extends Component {
-  render() {
-    return <MyComponent />
-  }
-}
-```
+The first start will take you minutes, so you may want to see the [demo](https://gjccing.github.io/at-homework/index.html).
 
 ## License
 

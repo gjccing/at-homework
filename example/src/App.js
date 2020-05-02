@@ -1,5 +1,6 @@
 import React, { useMemo, useState, useEffect } from 'react'
 import moment from 'moment'
+import 'moment/locale/zh-tw'
 import {
   Section,
   TimeList,
@@ -40,6 +41,7 @@ const App = () => {
     })
   }
   useEffect(() => fetchWeekAndSetSchedule(currentWeekOfYear), [])
+  useMemo(() => moment.locale(lang), [lang])
   return (
     <div>
       <fieldset>

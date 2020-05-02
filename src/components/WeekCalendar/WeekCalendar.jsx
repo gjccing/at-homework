@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
-import 'moment/locale/zh-tw'
 import classnames from 'classnames'
 import locale from '../../locale'
 import styles from './styles.module.css'
@@ -25,7 +24,6 @@ const WeekCalendar = ({
   renderCell,
   onPageChange
 }) => {
-  useMemo(() => moment.locale(lang), [lang])
   const langUtil = useMemo(() => locale.genUtil(lang), [lang])
   const currentWeek = useMemo(() => moment().week(currentWeekOfYear), [
     currentWeekOfYear,
